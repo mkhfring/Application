@@ -2,7 +2,7 @@ using System;
 
 namespace ContactManagement.Entities
 {
-    public class Contact
+    public record Contact
     {
         public Guid Id {set; get;}
         public string FirstName {set; get;}

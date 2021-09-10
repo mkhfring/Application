@@ -1,6 +1,6 @@
 namespace ContactManagement.Dtos
 {
-    public class UpdateContactDto
+    public record UpdateContactDto
     {
         public string FirstName {set; get;}
 

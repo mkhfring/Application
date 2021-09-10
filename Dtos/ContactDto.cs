@@ -2,7 +2,7 @@ using System;
 
 namespace ContactManagement.Dtos
 {
-    public class ContactDto
+    public record ContactDto
     {
         
         public Guid Id {set; get;}

@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 namespace ContactManagement.Dtos
 {
-    public class CreateDto
+    public record CreateDto
     {
         [Required]
         [Range(3, 50)]
