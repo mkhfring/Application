@@ -38,6 +38,7 @@ namespace ContactManagement.Repositories
         {
             return ContactList;
         }
+        
         public Contact GetContact(Guid id)
         {
             return ContactList.Where(Contact => Contact.Id == id).SingleOrDefault();
@@ -51,6 +52,11 @@ namespace ContactManagement.Repositories
         public void UpdateContact(Contact contact){
             var index = ContactList.FindIndex(existingContact => existingContact.Id == contact.Id);
             ContactList[index] = contact;
+        }
+        
+        public void DeleteContact(Guid id){
+            var index = ContactList.FindIndex(contact => contact.Id == id);
+            ContactList.RemoveAt(index);
         }
     }
 } 
