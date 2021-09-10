@@ -47,11 +47,15 @@ namespace ContactManagement.Controllers
            
         }
         [HttpPut("{id}")]
-        public ActionResult UpdateContact(Guid id, UpdateContactDto updateContact){
+        public ActionResult UpdateContact(Guid id, UpdateContactDto updateDto){
             var existingContact = repository.GetContact(id);
             if(existingContact is null){
                 return NotFound();
             }
+            Contact updateContact = existingContact with{
+                FirstName = updateDto.FirstName,
+                LastName = updateDto.LastName
+            };
             return NoContent();
         }
      

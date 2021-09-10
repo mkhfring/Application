@@ -29,6 +29,7 @@ namespace ContactManagement
 
             services.AddSingleton<IContactRepositories, InMemRepositories>();
             services.AddControllers();
+            services.AddCors();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ContactManagement", Version = "v1" });
@@ -46,7 +47,7 @@ namespace ContactManagement
             }
 
             app.UseRouting();
-
+            app.UseCors(m => m.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
