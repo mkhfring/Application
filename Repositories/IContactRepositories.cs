@@ -10,5 +10,7 @@ namespace ContactManagement.Repositories
         IEnumerable<Contact> GetContacts();
 
         void CreateContact(Contact contact);
+
+        void UpdateContact(Contact contact);
     }
 }

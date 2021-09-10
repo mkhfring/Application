@@ -44,10 +44,16 @@ namespace ContactManagement.Controllers
             };
             repository.CreateContact(newContact);
             return  newContact.AsDto();
-            
-            
+           
         }
-
+        [HttpPut("{id}")]
+        public ActionResult UpdateContact(Guid id, UpdateContactDto updateContact){
+            var existingContact = repository.GetContact(id);
+            if(existingContact is null){
+                return NotFound();
+            }
+            return NoContent();
+        }
      
     }
 }

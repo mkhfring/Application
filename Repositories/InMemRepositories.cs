@@ -47,5 +47,10 @@ namespace ContactManagement.Repositories
         {
             ContactList.Add(contact);
         }
+        
+        public void UpdateContact(Contact contact){
+            var index = ContactList.FindIndex(existingContact => existingContact.Id == contact.Id);
+            ContactList[index] = contact;
+        }
     }
 } 
