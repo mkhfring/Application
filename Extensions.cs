@@ -10,7 +10,9 @@ namespace ContactManagement
             return new ContactDto{
                 Id = contact.Id,
                 FirstName = contact.FirstName,
-                LastName = contact.LastName
+                LastName = contact.LastName,
+                Email = contact.Email,
+                MobineNumber = contact.MobineNumber
             };
         }
         
