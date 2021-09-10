@@ -9,8 +9,8 @@ namespace ContactManagement.Dtos
         public string FirstName {set; get;}
         public string LastName{set; get;}
         public string Email {set; get;}
-        public int HomePhoneNumber {set; get;}
-        public int BussinessPhoneNumber {set; get;}
-        public int MobineNumber {set; get;}
+        public string HomePhoneNumber {set; get;}
+        public string BussinessPhoneNumber {set; get;}
+        public string MobineNumber {set; get;}
     }
 }

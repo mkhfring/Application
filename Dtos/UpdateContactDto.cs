@@ -7,6 +7,6 @@ namespace ContactManagement.Dtos
         public string LastName{set; get;}
        
         public string Email{set; get;}
-        public int MobineNumber{set; get;}
+        public string MobineNumber{set; get;}
     }
 }
