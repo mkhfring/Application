@@ -42,7 +42,11 @@ namespace ContactManagement.Controllers
             Contact newContact = new(){
                 Id = Guid.NewGuid(),
                 FirstName = contactdto.FirstName,
-                LastName = contactdto.LastName
+                LastName = contactdto.LastName,
+                MobileNumber = contactdto.MobileNumber,
+                Email = contactdto.MobileNumber,
+                HomePhoneNumber = contactdto.HomePhoneNumber,
+                BussinessPhoneNumber = contactdto.BussinessPhoneNumber
             };
             await repository.CreateContactAsync(newContact);
             return  newContact.AsDto();
