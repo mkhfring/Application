@@ -11,6 +11,6 @@ namespace ContactManagement.Dtos
         public string Email {set; get;}
         public string HomePhoneNumber {set; get;}
         public string BussinessPhoneNumber {set; get;}
-        public string MobineNumber {set; get;}
+        public string MobileNumber {set; get;}
     }
 }

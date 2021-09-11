@@ -12,7 +12,7 @@ namespace ContactManagement
                 FirstName = contact.FirstName,
                 LastName = contact.LastName,
                 Email = contact.Email,
-                MobineNumber = contact.MobineNumber
+                MobileNumber = contact.MobileNumber
             };
         }
         

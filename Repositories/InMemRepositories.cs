@@ -17,21 +17,21 @@ namespace ContactManagement.Repositories
                 FirstName = "Mohamad",
                 LastName = "Khajezade",
                 Email="examle@example.com",
-                MobineNumber="12345" 
+                MobileNumber="12345" 
                 },
             new Contact {
                 Id = Guid.NewGuid(),
                 FirstName = "Ali", 
                 LastName = "Khajezade" ,
                 Email="examle1@example.com",
-                MobineNumber="12345"
+                MobileNumber="12345"
                 },
             new Contact { 
                 Id = Guid.NewGuid(),
                 FirstName = "Saman", 
                 LastName = "Khajezade",
                 Email="examle2@example.com",
-                MobineNumber="12345"
+                MobileNumber="12345"
                 }
 
         };
