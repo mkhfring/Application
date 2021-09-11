@@ -23,7 +23,7 @@ namespace ContactManagement.Dtos
         ]
         public string HomePhoneNumber {set; get;}
         [RegularExpression(
-            @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})\s(ext.)([0-9]{3})$",
+            @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
             ErrorMessage = "Invalid Business Phone Number")
         ]        
         public string BusinessPhoneNumber {set; get;}
