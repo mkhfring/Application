@@ -38,8 +38,8 @@ namespace ContactManagement
                 return new MongoClient (setting.ConnectionSrting);
             }
             );
-            //services.AddSingleton<IContactRepositories, InMemRepositories>();
-            services.AddSingleton<IContactRepositories, MongoDbRepositories>();
+            services.AddSingleton<IContactRepositories, InMemRepositories>();
+            //services.AddSingleton<IContactRepositories, MongoDbRepositories>();
 
             services.AddControllers();
             services.AddCors();
