@@ -42,7 +42,7 @@ namespace ContactManagement.Repositories
 
         public async Task<IEnumerable<Contact>> GetContactsAsync()
         {
-            return await contactCollection.Find(new BsonDocument()).ToListAsync();
+            return await contactCollection.Find(new BsonDocument()).SortBy(contact => contact.LastName).ToListAsync();
         }
 
         public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname)
