@@ -62,7 +62,10 @@ namespace ContactManagement.Controllers
             Contact updateContact = existingContact with{
                 FirstName = updateDto.FirstName,
                 LastName = updateDto.LastName,
-                Email = updateDto.Email
+                Email = updateDto.Email,
+                MobilePhoneNumber = updateDto.MobilePhoneNumber,
+                HomePhoneNumber = updateDto.HomePhoneNumber,
+                BusinessPhoneNumber = updateDto.BusinessPhoneNumber
             };
             await repository.UpdateContactAsync(updateContact);
 

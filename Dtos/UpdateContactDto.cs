@@ -8,5 +8,8 @@ namespace ContactManagement.Dtos
        
         public string Email{set; get;}
         public string MobilePhoneNumber{set; get;}
+        public string HomePhoneNumber {set; get;}
+        public string BusinessPhoneNumber {set; get;}
+
     }
 }
