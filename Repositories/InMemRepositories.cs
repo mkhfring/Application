@@ -63,5 +63,10 @@ namespace ContactManagement.Repositories
             ContactList.RemoveAt(index);
             await Task.CompletedTask;
         }
+
+        public Task<IEnumerable<Contact>> SearchContactsAsync(string FirstName)
+        {
+            throw new NotImplementedException();
+        }
     }
 } 
