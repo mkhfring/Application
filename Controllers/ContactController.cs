@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ContactManagement.Dtos;
 using ContactManagement.Entities;
 using ContactManagement.Repositories;
@@ -18,16 +19,17 @@ namespace ContactManagement.Controllers
             this.repository = repository;
             
         }
+
         [HttpGet]
-        public IEnumerable<ContactDto> GetContacts(){
-            var contacts = repository.GetContactsAsync().Select(contact => contact.AsDto());
+        public async Task<IEnumerable<ContactDto>> GetContactsAsync(){
+            var contacts = (await repository.GetContactsAsync()).Select(contact => contact.AsDto());
 
             return contacts;
-        }
+        } 
 
         [HttpGet("{id}")]
-        public ActionResult<ContactDto> GetContact(Guid id){
-            var contact = repository.GetContactAsync(id);
+        public async Task<ActionResult<ContactDto>> GetContactAsync(Guid id){
+            var contact = await repository.GetContactAsync(id);
 
             if (contact is null){
                 return NotFound();
@@ -36,19 +38,20 @@ namespace ContactManagement.Controllers
         }
 
         [HttpPost]
-        public ActionResult<ContactDto> CreateContact(CreateDto contactdto){
+        public async Task<ActionResult<ContactDto>> CreateContactAsync(CreateDto contactdto){
             Contact newContact = new(){
                 Id = Guid.NewGuid(),
                 FirstName = contactdto.FirstName,
                 LastName = contactdto.LastName
             };
-            repository.CreateContactAsync(newContact);
+            await repository.CreateContactAsync(newContact);
             return  newContact.AsDto();
            
         }
+
         [HttpPut("{id}")]
-        public ActionResult UpdateContact(Guid id, UpdateContactDto updateDto){
-            var existingContact = repository.GetContactAsync(id);
+        public async Task<ActionResult> UpdateContactAsync(Guid id, UpdateContactDto updateDto){
+            var existingContact = await repository.GetContactAsync(id);
             if(existingContact is null){
                 return NotFound();
             }
@@ -57,19 +60,19 @@ namespace ContactManagement.Controllers
                 LastName = updateDto.LastName,
                 Email = updateDto.Email
             };
-            repository.UpdateContactAsync(updateContact);
+            await repository.UpdateContactAsync(updateContact);
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteContact(Guid id){
-            Contact existingContact = repository.GetContactAsync(id);
+        public async Task<ActionResult> DeleteContact(Guid id){
+            Contact existingContact = await repository.GetContactAsync(id);
             if (existingContact is null){
                 return NotFound();
             }
 
-            repository.DeleteContactAsync(id);
+            await repository.DeleteContactAsync(id);
             return NoContent();
         }
      

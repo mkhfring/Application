@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ContactManagement.Entities;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -22,32 +23,32 @@ namespace ContactManagement.Repositories
             contactCollection = database.GetCollection<Contact>(collectionName);
         }
 
-        public void CreateContactAsync(Contact contact)
+        public async Task CreateContactAsync(Contact contact)
         {
-            contactCollection.InsertOne(contact);
+            await contactCollection.InsertOneAsync(contact);
         }
 
-        public void DeleteContactAsync(Guid id)
-        {
-            var filter = contactFilterBuilder.Eq(contact => contact.Id, id);
-            contactCollection.DeleteOne(filter);    
-        }
-
-        public Contact GetContactAsync(Guid id)
+        public async Task DeleteContactAsync(Guid id)
         {
             var filter = contactFilterBuilder.Eq(contact => contact.Id, id);
-            return contactCollection.Find(filter).SingleOrDefault();
+            await contactCollection.DeleteOneAsync(filter);    
         }
 
-        public IEnumerable<Contact> GetContactsAsync()
+        public async Task<Contact> GetContactAsync(Guid id)
         {
-            return contactCollection.Find(new BsonDocument()).ToList();
+            var filter = contactFilterBuilder.Eq(contact => contact.Id, id);
+            return await contactCollection.Find(filter).SingleOrDefaultAsync();
         }
 
-        public void UpdateContactAsync(Contact contact)
+        public async Task<IEnumerable<Contact>> GetContactsAsync()
+        {
+            return await contactCollection.Find(new BsonDocument()).ToListAsync();
+        }
+
+        public async Task UpdateContactAsync(Contact contact)
         {
             var filter = contactFilterBuilder.Eq(existingContact => existingContact.Id, contact.Id);
-            contactCollection.ReplaceOne(filter, contact);
+            await contactCollection.ReplaceOneAsync(filter, contact);
         }
     }
 } 

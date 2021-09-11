@@ -1,18 +1,19 @@
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ContactManagement.Entities;
 
 namespace ContactManagement.Repositories
 {
     public interface IContactRepositories
     {
-        Contact GetContactAsync(Guid id);
-        IEnumerable<Contact> GetContactsAsync();
+        Task<Contact> GetContactAsync(Guid id);
+        Task<IEnumerable<Contact>> GetContactsAsync();
 
-        void CreateContactAsync(Contact contact);
+        Task CreateContactAsync(Contact contact);
 
-        void UpdateContactAsync(Contact contact);
+        Task UpdateContactAsync(Contact contact);
 
-        void DeleteContactAsync(Guid id);
+        Task DeleteContactAsync(Guid id);
     }
 }

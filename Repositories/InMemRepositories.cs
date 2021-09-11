@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ContactManagement.Entities;
 
 namespace ContactManagement.Repositories
@@ -34,29 +35,33 @@ namespace ContactManagement.Repositories
                 }
 
         };
-        public IEnumerable<Contact> GetContactsAsync()
+        public async Task<IEnumerable<Contact>> GetContactsAsync()
         {
-            return ContactList;
+            return await Task.FromResult(ContactList);
         }
         
-        public Contact GetContactAsync(Guid id)
+        public async Task<Contact> GetContactAsync(Guid id)
         {
-            return ContactList.Where(Contact => Contact.Id == id).SingleOrDefault();
+            var contact =  ContactList.Where(Contact => Contact.Id == id).SingleOrDefault();
+            return await Task.FromResult(contact);
         }
 
-        public void CreateContactAsync(Contact contact)
+        public async Task CreateContactAsync(Contact contact)
         {
             ContactList.Add(contact);
+            await Task.CompletedTask;
         }
 
-        public void UpdateContactAsync(Contact contact){
+        public async Task UpdateContactAsync(Contact contact){
             var index = ContactList.FindIndex(existingContact => existingContact.Id == contact.Id);
             ContactList[index] = contact;
+            await Task.CompletedTask;
         }
         
-        public void DeleteContactAsync(Guid id){
+        public async Task DeleteContactAsync(Guid id){
             var index = ContactList.FindIndex(contact => contact.Id == id);
             ContactList.RemoveAt(index);
+            await Task.CompletedTask;
         }
     }
 } 
