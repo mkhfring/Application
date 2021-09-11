@@ -12,5 +12,7 @@ namespace ContactManagement.Repositories
         void CreateContact(Contact contact);
 
         void UpdateContact(Contact contact);
+
+        void DeleteContact(Guid id);
     }
 }

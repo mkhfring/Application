@@ -54,8 +54,22 @@ namespace ContactManagement.Controllers
             }
             Contact updateContact = existingContact with{
                 FirstName = updateDto.FirstName,
-                LastName = updateDto.LastName
+                LastName = updateDto.LastName,
+                Email = updateDto.Email
             };
+            repository.UpdateContact(updateContact);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult DeleteContact(Guid id){
+            Contact existingContact = repository.GetContact(id);
+            if (existingContact is null){
+                return NotFound();
+            }
+
+            repository.DeleteContact(id);
             return NoContent();
         }
      
