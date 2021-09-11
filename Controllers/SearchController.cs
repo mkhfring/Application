@@ -21,11 +21,23 @@ namespace ContactManagement.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Contact>> SearchContactAsync(string firstname){
+        public async Task<ActionResult<IEnumerable<Contact>>> SearchContactAsync(string firstname, string lastname){
 
-            var contacts = await repository.SearchContactsAsync(firstname);
+            if ((firstname is null) && (lastname is null)){
+                return BadRequest("Both firstname and last name are empty");
+                
+            } 
+            if ((firstname is null) && (lastname is not null)){
+                var contactsForLastname = await repository.SearchContactsAsync(lastname);
+                return contactsForLastname.ToList();
+            }
+            if ((firstname is not null) && (lastname is null)){
+                var contactsForFirstname = await repository.SearchContactsAsync(firstname);
+                return contactsForFirstname.ToList();
+            }
 
-            return contacts;
+            var contacts = await repository.SearchContactsAsync(firstname, lastname);
+            return contacts.ToList();
         } 
 
 

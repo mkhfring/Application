@@ -45,9 +45,14 @@ namespace ContactManagement.Repositories
             return await contactCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname)
+        public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname)
         {
-            var filter = contactFilterBuilder.Eq(contact => contact.FirstName, firstname);
+            var filter = contactFilterBuilder.Eq(contact => contact.FirstName, firstname) & contactFilterBuilder.Eq(contact => contact.LastName, lastname);
+            return await contactCollection.Find(filter).ToListAsync();
+        }
+        public async Task<IEnumerable<Contact>> SearchContactsAsync(string query)
+        {
+            var filter = contactFilterBuilder.Eq(contact => contact.FirstName, query) | contactFilterBuilder.Eq(contact => contact.LastName, query);
             return await contactCollection.Find(filter).ToListAsync();
         }
 

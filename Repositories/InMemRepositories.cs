@@ -68,5 +68,9 @@ namespace ContactManagement.Repositories
         {
             throw new NotImplementedException();
         }
+        public Task<IEnumerable<Contact>> SearchContactsAsync(string FirstName, string lastname)
+        {
+            throw new NotImplementedException();
+        }
     }
 } 
