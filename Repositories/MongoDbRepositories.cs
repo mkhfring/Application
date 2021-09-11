@@ -45,9 +45,10 @@ namespace ContactManagement.Repositories
             return await contactCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        public Task<IEnumerable<Contact>> SearchContactsAsync(string FirstName)
+        public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname)
         {
-            throw new NotImplementedException();
+            var filter = contactFilterBuilder.Eq(contact => contact.FirstName, firstname);
+            return await contactCollection.Find(filter).ToListAsync();
         }
 
         public async Task UpdateContactAsync(Contact contact)

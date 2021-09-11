@@ -10,7 +10,7 @@ namespace ContactManagement.Repositories
         Task<Contact> GetContactAsync(Guid id);
         Task<IEnumerable<Contact>> GetContactsAsync();
 
-        Task<IEnumerable<Contact>> SearchContactsAsync(string FirstName);
+        Task<IEnumerable<Contact>> SearchContactsAsync(string firstname);
 
         Task CreateContactAsync(Contact contact);
 
