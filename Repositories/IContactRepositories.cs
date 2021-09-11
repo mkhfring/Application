@@ -6,13 +6,13 @@ namespace ContactManagement.Repositories
 {
     public interface IContactRepositories
     {
-        Contact GetContact(Guid id);
-        IEnumerable<Contact> GetContacts();
+        Contact GetContactAsync(Guid id);
+        IEnumerable<Contact> GetContactsAsync();
 
-        void CreateContact(Contact contact);
+        void CreateContactAsync(Contact contact);
 
-        void UpdateContact(Contact contact);
+        void UpdateContactAsync(Contact contact);
 
-        void DeleteContact(Guid id);
+        void DeleteContactAsync(Guid id);
     }
 }

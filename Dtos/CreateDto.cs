@@ -4,11 +4,9 @@ namespace ContactManagement.Dtos
     public record CreateDto
     {
         [Required]
-        [Range(3, 50)]
         public string FirstName {set; get;}
 
         [Required]
-        [Range(3, 50)]
         public string LastName{set; get;}
         
         public string Email{set; get;}

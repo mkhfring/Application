@@ -20,14 +20,14 @@ namespace ContactManagement.Controllers
         }
         [HttpGet]
         public IEnumerable<ContactDto> GetContacts(){
-            var contacts = repository.GetContacts().Select(contact => contact.AsDto());
+            var contacts = repository.GetContactsAsync().Select(contact => contact.AsDto());
 
             return contacts;
         }
 
         [HttpGet("{id}")]
         public ActionResult<ContactDto> GetContact(Guid id){
-            var contact = repository.GetContact(id);
+            var contact = repository.GetContactAsync(id);
 
             if (contact is null){
                 return NotFound();
@@ -42,13 +42,13 @@ namespace ContactManagement.Controllers
                 FirstName = contactdto.FirstName,
                 LastName = contactdto.LastName
             };
-            repository.CreateContact(newContact);
+            repository.CreateContactAsync(newContact);
             return  newContact.AsDto();
            
         }
         [HttpPut("{id}")]
         public ActionResult UpdateContact(Guid id, UpdateContactDto updateDto){
-            var existingContact = repository.GetContact(id);
+            var existingContact = repository.GetContactAsync(id);
             if(existingContact is null){
                 return NotFound();
             }
@@ -57,19 +57,19 @@ namespace ContactManagement.Controllers
                 LastName = updateDto.LastName,
                 Email = updateDto.Email
             };
-            repository.UpdateContact(updateContact);
+            repository.UpdateContactAsync(updateContact);
 
             return NoContent();
         }
 
         [HttpDelete("{id}")]
         public ActionResult DeleteContact(Guid id){
-            Contact existingContact = repository.GetContact(id);
+            Contact existingContact = repository.GetContactAsync(id);
             if (existingContact is null){
                 return NotFound();
             }
 
-            repository.DeleteContact(id);
+            repository.DeleteContactAsync(id);
             return NoContent();
         }
      

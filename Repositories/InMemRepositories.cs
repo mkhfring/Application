@@ -34,27 +34,27 @@ namespace ContactManagement.Repositories
                 }
 
         };
-        public IEnumerable<Contact> GetContacts()
+        public IEnumerable<Contact> GetContactsAsync()
         {
             return ContactList;
         }
         
-        public Contact GetContact(Guid id)
+        public Contact GetContactAsync(Guid id)
         {
             return ContactList.Where(Contact => Contact.Id == id).SingleOrDefault();
         }
 
-        public void CreateContact(Contact contact)
+        public void CreateContactAsync(Contact contact)
         {
             ContactList.Add(contact);
         }
 
-        public void UpdateContact(Contact contact){
+        public void UpdateContactAsync(Contact contact){
             var index = ContactList.FindIndex(existingContact => existingContact.Id == contact.Id);
             ContactList[index] = contact;
         }
         
-        public void DeleteContact(Guid id){
+        public void DeleteContactAsync(Guid id){
             var index = ContactList.FindIndex(contact => contact.Id == id);
             ContactList.RemoveAt(index);
         }

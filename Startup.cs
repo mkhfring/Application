@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ContactManagement.Repositories;
+using ContactManagement.Setting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Driver;
 
 namespace ContactManagement
 {
@@ -26,8 +31,16 @@ namespace ContactManagement
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            BsonSerializer.RegisterSerializer(new GuidSerializer(BsonType.String));
+            services.AddSingleton<IMongoClient> (serviceProvider => 
+            {
+                var setting = Configuration.GetSection(nameof(MongoDbSetting)).Get<MongoDbSetting>();
+                return new MongoClient (setting.ConnectionSrting);
+            }
+            );
+            //services.AddSingleton<IContactRepositories, InMemRepositories>();
+            services.AddSingleton<IContactRepositories, MongoDbRepositories>();
 
-            services.AddSingleton<IContactRepositories, InMemRepositories>();
             services.AddControllers();
             services.AddCors();
             services.AddSwaggerGen(c =>
