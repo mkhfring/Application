@@ -7,6 +7,6 @@ namespace ContactManagement.Dtos
         public string LastName{set; get;}
         
         public string Email{set; get;}
-        public string MobileNumber{set; get;}
+        public string MobilePhoneNumber{set; get;}
     }
 }

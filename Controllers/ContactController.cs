@@ -43,10 +43,10 @@ namespace ContactManagement.Controllers
                 Id = Guid.NewGuid(),
                 FirstName = contactdto.FirstName,
                 LastName = contactdto.LastName,
-                MobileNumber = contactdto.MobileNumber,
-                Email = contactdto.MobileNumber,
+                MobilePhoneNumber = contactdto.MobilePhoneNumber,
+                Email = contactdto.Email,
                 HomePhoneNumber = contactdto.HomePhoneNumber,
-                BussinessPhoneNumber = contactdto.BussinessPhoneNumber
+                BusinessPhoneNumber = contactdto.BusinessPhoneNumber
             };
             await repository.CreateContactAsync(newContact);
             return  newContact.AsDto();

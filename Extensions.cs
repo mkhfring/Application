@@ -12,9 +12,9 @@ namespace ContactManagement
                 FirstName = contact.FirstName,
                 LastName = contact.LastName,
                 Email = contact.Email,
-                MobileNumber = contact.MobileNumber,
+                MobilePhoneNumber = contact.MobilePhoneNumber,
                 HomePhoneNumber = contact.HomePhoneNumber,
-                BussinessPhoneNumber = contact.BussinessPhoneNumber
+                BusinessPhoneNumber = contact.BusinessPhoneNumber
             };
         }
         
