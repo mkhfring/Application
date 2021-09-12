@@ -38,14 +38,18 @@ namespace ContactManagement.Repositories
             return await context.Contacts.OrderBy(a => a.LastName).ToListAsync();
         }
 
-        public Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname)
+        public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname)
         {
-            throw new NotImplementedException();
+            return await context.Contacts
+            .Where(Contact=> Contact.FirstName.ToLower() == firstname.ToLower() && Contact.LastName.ToLower() == lastname.ToLower())
+            .ToListAsync();
         }
 
-        public Task<IEnumerable<Contact>> SearchContactsAsync(string query)
+        public async Task<IEnumerable<Contact>> SearchContactsAsync(string query)
         {
-            throw new NotImplementedException();
+            return await context.Contacts
+            .Where(Contact=> Contact.FirstName.ToLower() == query.ToLower() || Contact.LastName.ToLower() == query.ToLower())
+            .ToListAsync();
         }
 
         public async Task UpdateContactAsync(Contact contact)
