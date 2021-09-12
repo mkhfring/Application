@@ -64,11 +64,11 @@ namespace ContactManagement.Repositories
             await Task.CompletedTask;
         }
 
-        public Task<IEnumerable<Contact>> SearchContactsAsync(string FirstName)
+        public Task<IEnumerable<Contact>> SearchContactsAsync(string FirstName, int PageNumber, int PageSize)
         {
             throw new NotImplementedException();
         }
-        public Task<IEnumerable<Contact>> SearchContactsAsync(string FirstName, string lastname)
+        public Task<IEnumerable<Contact>> SearchContactsAsync(string FirstName, string lastname, int PageNumber, int PageSize)
         {
             throw new NotImplementedException();
         }

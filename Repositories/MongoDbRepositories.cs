@@ -50,13 +50,13 @@ namespace ContactManagement.Repositories
             .ToListAsync();
         }
 
-        public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname)
+        public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname, int PageNumber, int PageSize)
         {
             var filter = contactFilterBuilder
             .Eq(contact => contact.FirstName, firstname) & contactFilterBuilder.Eq(contact => contact.LastName, lastname);
             return await contactCollection.Find(filter).ToListAsync();
         }
-        public async Task<IEnumerable<Contact>> SearchContactsAsync(string query)
+        public async Task<IEnumerable<Contact>> SearchContactsAsync(string query, int PageNumber, int PageSize)
         {
             var filter = contactFilterBuilder
             .Eq(contact => contact.FirstName, query) | contactFilterBuilder.Eq(contact => contact.LastName, query);

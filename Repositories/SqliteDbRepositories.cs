@@ -42,17 +42,21 @@ namespace ContactManagement.Repositories
             .ToListAsync();
         }
 
-        public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname)
+        public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname, int PageNumber, int PageSize)
         {
             return await context.Contacts
             .Where(Contact=> Contact.FirstName.ToLower() == firstname.ToLower() && Contact.LastName.ToLower() == lastname.ToLower())
+            .Skip((PageNumber -1) * PageSize)
+            .Take(PageSize)
             .ToListAsync();
         }
 
-        public async Task<IEnumerable<Contact>> SearchContactsAsync(string query)
+        public async Task<IEnumerable<Contact>> SearchContactsAsync(string query, int PageNumber, int PageSize)
         {
             return await context.Contacts
             .Where(Contact=> Contact.FirstName.ToLower() == query.ToLower() || Contact.LastName.ToLower() == query.ToLower())
+            .Skip((PageNumber -1) * PageSize)
+            .Take(PageSize)
             .ToListAsync();
         }
 
