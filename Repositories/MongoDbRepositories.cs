@@ -40,7 +40,7 @@ namespace ContactManagement.Repositories
             return await contactCollection.Find(filter).SingleOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Contact>> GetContactsAsync()
+        public async Task<IEnumerable<Contact>> GetContactsAsync(int PageNumber, int PageSize)
         {
             return await contactCollection.Find(new BsonDocument()).SortBy(contact => contact.LastName).ToListAsync();
         }

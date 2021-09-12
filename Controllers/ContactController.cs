@@ -21,9 +21,8 @@ namespace ContactManagement.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ContactDto>> GetContactsAsync(){
-            var contacts = (await repository.GetContactsAsync()).Select(contact => contact.AsDto());
-            int contactListNumber = contacts.Count();
+        public async Task<IEnumerable<ContactDto>> GetContactsAsync(int PageNumber=1, int PageSize=50){
+            var contacts = (await repository.GetContactsAsync(PageNumber, PageSize)).Select(contact => contact.AsDto());
 
             return contacts;
         } 

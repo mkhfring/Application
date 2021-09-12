@@ -35,7 +35,7 @@ namespace ContactManagement.Repositories
                 }
 
         };
-        public async Task<IEnumerable<Contact>> GetContactsAsync()
+        public async Task<IEnumerable<Contact>> GetContactsAsync(int PageNumber, int PageSize)
         {
             return await Task.FromResult(ContactList);
         }

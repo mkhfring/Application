@@ -33,9 +33,13 @@ namespace ContactManagement.Repositories
             return await context.Contacts.FindAsync(id);
         }
 
-        public async Task<IEnumerable<Contact>> GetContactsAsync()
+        public async Task<IEnumerable<Contact>> GetContactsAsync(int PageNumber, int PageSize)
         {
-            return await context.Contacts.OrderBy(a => a.LastName).ToListAsync();
+            return await context.Contacts
+            .OrderBy(a => a.LastName)
+            .Skip((PageNumber-1) * PageSize)
+            .Take(PageSize)
+            .ToListAsync();
         }
 
         public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname)
