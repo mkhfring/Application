@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ContactManagement.database;
 using ContactManagement.Entities;
@@ -34,7 +35,7 @@ namespace ContactManagement.Repositories
 
         public async Task<IEnumerable<Contact>> GetContactsAsync()
         {
-            return await context.Contacts.ToListAsync();
+            return await context.Contacts.OrderBy(a => a.LastName).ToListAsync();
         }
 
         public Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname)
