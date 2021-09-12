@@ -40,9 +40,13 @@ namespace ContactManagement
                 return new MongoClient (setting.ConnectionSrting);
             }
             );
-            //services.AddSingleton<IContactRepositories, InMemRepositories>();
-            services.AddSingleton<IContactRepositories, MongoDbRepositories>();
             services.AddDbContext<ContactContext>(option => option.UseSqlite("Data source=contacts.db"));
+
+            //Registering different repositories to interface
+            //services.AddSingleton<IContactRepositories, InMemRepositories>();
+            //services.AddSingleton<IContactRepositories, MongoDbRepositories>();
+            services.AddScoped<IContactRepositories, SqliteDbRepositories>();
+            
 
             services.AddControllers();
             services.AddCors();

@@ -1,15 +1,23 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ContactManagement.database;
 using ContactManagement.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContactManagement.Repositories
 {
     public class SqliteDbRepositories : IContactRepositories
     {
-        public Task CreateContactAsync(Contact contact)
+        private readonly ContactContext context;
+        public SqliteDbRepositories(ContactContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
+        }
+        public async Task CreateContactAsync(Contact contact)
+        {
+            context.Contacts.Add(contact);
+            await context.SaveChangesAsync();
         }
 
         public Task DeleteContactAsync(Guid id)
@@ -22,9 +30,9 @@ namespace ContactManagement.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<Contact>> GetContactsAsync()
+        public async Task<IEnumerable<Contact>> GetContactsAsync()
         {
-            throw new NotImplementedException();
+            return await context.Contacts.ToListAsync();
         }
 
         public Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname)
