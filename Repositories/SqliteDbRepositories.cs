@@ -45,7 +45,7 @@ namespace ContactManagement.Repositories
         public async Task<IEnumerable<Contact>> SearchContactsAsync(string firstname, string lastname, int PageNumber, int PageSize)
         {
             return await context.Contacts
-            .Where(Contact=> Contact.FirstName.ToLower() == firstname.ToLower() && Contact.LastName.ToLower() == lastname.ToLower())
+            .Where(Contact=> Contact.FirstName.ToLower().Contains(firstname.ToLower()) && Contact.LastName.ToLower().Contains(lastname.ToLower()))
             .Skip((PageNumber -1) * PageSize)
             .Take(PageSize)
             .ToListAsync();
@@ -54,7 +54,7 @@ namespace ContactManagement.Repositories
         public async Task<IEnumerable<Contact>> SearchContactsAsync(string query, int PageNumber, int PageSize)
         {
             return await context.Contacts
-            .Where(Contact=> Contact.FirstName.ToLower() == query.ToLower() || Contact.LastName.ToLower() == query.ToLower())
+            .Where(Contact=> Contact.FirstName.ToLower().Contains(query.ToLower()) || Contact.LastName.ToLower().Contains(query.ToLower()))
             .Skip((PageNumber -1) * PageSize)
             .Take(PageSize)
             .ToListAsync();
