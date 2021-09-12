@@ -23,6 +23,7 @@ namespace ContactManagement.Controllers
         [HttpGet]
         public async Task<IEnumerable<ContactDto>> GetContactsAsync(){
             var contacts = (await repository.GetContactsAsync()).Select(contact => contact.AsDto());
+            int contactListNumber = contacts.Count();
 
             return contacts;
         } 
