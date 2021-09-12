@@ -25,7 +25,8 @@ namespace ContactManagement.Controllers
         public async Task<ActionResult<ContactListResponse>> SearchContactAsync(string firstname, string lastname, int PageNumber=1, int PageSize=50){
 
             if ((firstname is null) && (lastname is null)){
-                return BadRequest("Both firstname and last name are empty");
+                var AllContacts = (await repository.GetContactsAsync(PageNumber, PageSize)).Select(contact => contact.AsDto());
+                return AllContacts.AsContactListReponse(await repository.TotalRecordsAsync()); 
                 
             } 
             if ((firstname is null) && (lastname is not null)){
