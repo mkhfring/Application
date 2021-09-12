@@ -1,6 +1,8 @@
 using System;
+using System.Collections.Generic;
 using ContactManagement.Dtos;
 using ContactManagement.Entities;
+using ContactManagement.Response;
 
 namespace ContactManagement
 {
@@ -16,6 +18,14 @@ namespace ContactManagement
                 HomePhoneNumber = contact.HomePhoneNumber,
                 BusinessPhoneNumber = contact.BusinessPhoneNumber
             };
+        }
+        public static ContactListResponse AsContactListReponse (this IEnumerable<ContactDto> contactList, int ContactNumber){
+
+            return new ContactListResponse {
+                ContactList = contactList,
+                TotalNumber = ContactNumber
+            };
+
         }
         
     }

@@ -29,13 +29,7 @@ namespace ContactManagement.Controllers
             var contacts = (await repository.GetContactsAsync(PageNumber, PageSize)).Select(contact => contact.AsDto());
             int ContactNumber = contacts.Count();
 
-            var response = new ContactListResponse{
-                ContactList = contacts,
-                TotalNumber = ContactNumber
-            };
-            
-
-            return response;
+            return contacts.AsContactListReponse(ContactNumber);
         } 
 
         [HttpGet("{id}")]
