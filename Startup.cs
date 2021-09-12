@@ -44,8 +44,8 @@ namespace ContactManagement
 
             //Registering different repositories to interface
             //services.AddSingleton<IContactRepositories, InMemRepositories>();
-            services.AddSingleton<IContactRepositories, MongoDbRepositories>();
-            //services.AddScoped<IContactRepositories, SqliteDbRepositories>();
+            //services.AddSingleton<IContactRepositories, MongoDbRepositories>();
+            services.AddScoped<IContactRepositories, SqliteDbRepositories>();
             
 
             services.AddControllers();
