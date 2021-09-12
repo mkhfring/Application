@@ -60,12 +60,12 @@ namespace ContactManagement.Controllers
                 return NotFound();
             }
             Contact updateContact = existingContact with{
-                FirstName = updateDto.FirstName,
-                LastName = updateDto.LastName,
-                Email = updateDto.Email,
-                MobilePhoneNumber = updateDto.MobilePhoneNumber,
-                HomePhoneNumber = updateDto.HomePhoneNumber,
-                BusinessPhoneNumber = updateDto.BusinessPhoneNumber
+                FirstName = updateDto.FirstName is null ? existingContact.FirstName: updateDto.FirstName,
+                LastName = updateDto.LastName is null ? existingContact.LastName: updateDto.LastName,
+                Email = updateDto.Email is null ? existingContact.Email: updateDto.Email,
+                MobilePhoneNumber = updateDto.MobilePhoneNumber is null ? existingContact.MobilePhoneNumber: updateDto.MobilePhoneNumber,
+                HomePhoneNumber = updateDto.HomePhoneNumber is null ? existingContact.HomePhoneNumber: updateDto.HomePhoneNumber,
+                BusinessPhoneNumber = updateDto.BusinessPhoneNumber is null ? existingContact.BusinessPhoneNumber: updateDto.BusinessPhoneNumber
             };
             await repository.UpdateContactAsync(updateContact);
 

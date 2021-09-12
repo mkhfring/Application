@@ -53,9 +53,9 @@ namespace ContactManagement.Repositories
             var props = typeof(Contact).GetProperties();
             foreach(var prop in props){
                 var value = prop.GetValue(contact);
-                if (value is null){
-                    continue;
-                }
+                // if (value is null){
+                //     continue;
+                // }
                 prop.SetValue(existingContact, value);
             }
             await context.SaveChangesAsync();
