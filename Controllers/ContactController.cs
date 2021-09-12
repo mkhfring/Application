@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ContactManagement.Dtos;
 using ContactManagement.Entities;
 using ContactManagement.Repositories;
+using ContactManagement.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactManagement.Controllers
@@ -14,17 +15,27 @@ namespace ContactManagement.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IContactRepositories repository;
+        //private readonly ContactListResponse response;
         public ContactController(IContactRepositories repository)
+             
         {
             this.repository = repository;
             
         }
 
         [HttpGet]
-        public async Task<IEnumerable<ContactDto>> GetContactsAsync(int PageNumber=1, int PageSize=50){
+        public async Task<ContactListResponse> GetContactsAsync(int PageNumber=1, int PageSize=50){
+            
             var contacts = (await repository.GetContactsAsync(PageNumber, PageSize)).Select(contact => contact.AsDto());
+            int ContactNumber = contacts.Count();
 
-            return contacts;
+            var response = new ContactListResponse{
+                ContactList = contacts,
+                TotalNumber = ContactNumber
+            };
+            
+
+            return response;
         } 
 
         [HttpGet("{id}")]
