@@ -15,7 +15,6 @@ namespace ContactManagement.Controllers
     public class ContactController : ControllerBase
     {
         private readonly IContactRepositories repository;
-        //private readonly ContactListResponse response;
         public ContactController(IContactRepositories repository)
              
         {

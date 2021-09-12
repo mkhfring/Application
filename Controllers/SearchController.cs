@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ContactManagement.Dtos;
 using ContactManagement.Entities;
 using ContactManagement.Repositories;
+using ContactManagement.Response;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ContactManagement.Controllers
@@ -21,26 +22,27 @@ namespace ContactManagement.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Contact>>> SearchContactAsync(string firstname, string lastname){
+        public async Task<ActionResult<ContactListResponse>> SearchContactAsync(string firstname, string lastname){
 
             if ((firstname is null) && (lastname is null)){
                 return BadRequest("Both firstname and last name are empty");
                 
             } 
             if ((firstname is null) && (lastname is not null)){
-                var contactsForLastname = await repository.SearchContactsAsync(lastname);
-                return contactsForLastname.ToList();
+                var contactsForLastname = (await repository.SearchContactsAsync(lastname)).Select(contact => contact.AsDto());
+                int ContactForLastNameNumber = contactsForLastname.Count();
+                return contactsForLastname.AsContactListReponse(ContactForLastNameNumber);
             }
             if ((firstname is not null) && (lastname is null)){
-                var contactsForFirstname = await repository.SearchContactsAsync(firstname);
-                return contactsForFirstname.ToList();
+                var contactsForFirstname = (await repository.SearchContactsAsync(firstname)).Select(contact => contact.AsDto());
+                int ContactForFirstNameNumber = contactsForFirstname.Count();
+                return contactsForFirstname.AsContactListReponse(ContactForFirstNameNumber);
             }
 
-            var contacts = await repository.SearchContactsAsync(firstname, lastname);
-            return contacts.ToList();
+            var contacts = (await repository.SearchContactsAsync(firstname, lastname)).Select(contact => contact.AsDto());
+            int ContactNumber = contacts.Count();
+            return contacts.AsContactListReponse(ContactNumber);
         } 
-
-
      
     }
 }
