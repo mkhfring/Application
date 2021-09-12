@@ -63,6 +63,11 @@ namespace ContactManagement.Repositories
             return await contactCollection.Find(filter).ToListAsync();
         }
 
+        public async Task<int> TotalRecordsAsync()
+        {
+            return (await contactCollection.Find(new BsonDocument()).ToListAsync()).Count();
+        }
+
         public async Task UpdateContactAsync(Contact contact)
         {
             var filter = contactFilterBuilder.Eq(existingContact => existingContact.Id, contact.Id);

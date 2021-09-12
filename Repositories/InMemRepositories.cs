@@ -72,5 +72,10 @@ namespace ContactManagement.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<int> TotalRecordsAsync()
+        {
+            return await Task.FromResult(ContactList.Count());
+        }
     }
 } 

@@ -19,6 +19,8 @@ namespace ContactManagement.Repositories
 
         Task DeleteContactAsync(Guid id);
 
+        Task <int> TotalRecordsAsync();
+
         
     }
 }

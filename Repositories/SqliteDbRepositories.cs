@@ -60,6 +60,11 @@ namespace ContactManagement.Repositories
             .ToListAsync();
         }
 
+        public async Task<int> TotalRecordsAsync()
+        {
+            return await Task.FromResult(context.Contacts.Count());
+        }
+
         public async Task UpdateContactAsync(Contact contact)
         {
             var existingContact = await context.Contacts.FindAsync(contact.Id);
@@ -73,5 +78,6 @@ namespace ContactManagement.Repositories
             }
             await context.SaveChangesAsync();
         }
+
     }
 }
