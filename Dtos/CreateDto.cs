@@ -10,8 +10,13 @@ namespace ContactManagement.Dtos
         [Required]
         [MaxLength(50)]
         public string LastName{set; get;}
-        [EmailAddress(ErrorMessage = "Invalid Email Address")]
+
+        [RegularExpression(
+            @"^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$",
+            ErrorMessage = "Invalid Email")
+        ]
         public string Email{set; get;}
+        
         [RegularExpression(
             @"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$",
             ErrorMessage = "Invalid Mobile Number")
