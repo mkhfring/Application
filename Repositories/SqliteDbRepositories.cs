@@ -20,14 +20,16 @@ namespace ContactManagement.Repositories
             await context.SaveChangesAsync();
         }
 
-        public Task DeleteContactAsync(Guid id)
+        public async Task DeleteContactAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var existingContact = await context.Contacts.FindAsync(id);
+            context.Remove(existingContact);
+            await context.SaveChangesAsync();
         }
 
-        public Task<Contact> GetContactAsync(Guid id)
+        public async Task<Contact> GetContactAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await context.Contacts.FindAsync(id);
         }
 
         public async Task<IEnumerable<Contact>> GetContactsAsync()
@@ -45,9 +47,18 @@ namespace ContactManagement.Repositories
             throw new NotImplementedException();
         }
 
-        public Task UpdateContactAsync(Contact contact)
+        public async Task UpdateContactAsync(Contact contact)
         {
-            throw new NotImplementedException();
+            var existingContact = await context.Contacts.FindAsync(contact.Id);
+            var props = typeof(Contact).GetProperties();
+            foreach(var prop in props){
+                var value = prop.GetValue(contact);
+                if (value is null){
+                    continue;
+                }
+                prop.SetValue(existingContact, value);
+            }
+            await context.SaveChangesAsync();
         }
     }
 }
